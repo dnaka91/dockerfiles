@@ -1,0 +1,24 @@
+name: Docker
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  publish-cargo-deb:
+    name: Publish cargo-deb
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build & push Docker image
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: ghcr.io
+          repository: ${{ github.repository }}
+          tags: latest
+          path: cargo-deb
