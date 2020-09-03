@@ -19,6 +19,6 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
           registry: ghcr.io
-          repository: ${{ github.repository }}
+          repository: ${{ github.repository_owner }}/cargo-deb
           tags: latest
           path: cargo-deb
